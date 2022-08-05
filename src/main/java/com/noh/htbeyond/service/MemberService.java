@@ -1,9 +1,12 @@
 package com.noh.htbeyond.service;
 
+import com.noh.htbeyond.controller.dto.MembersResDTO;
 import com.noh.htbeyond.model.Gender;
 import com.noh.htbeyond.model.Member;
 import com.noh.htbeyond.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -36,5 +39,9 @@ public class MemberService {
         } else {
             return null;
         }
+    }
+
+    public Page<MembersResDTO> findAll(Pageable pageable) {
+        return memberRepository.findAllWithLastOrder(pageable);
     }
 }

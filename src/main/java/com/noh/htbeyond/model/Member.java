@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -31,6 +32,8 @@ public class Member {
     private String email;
 
     private Gender gender;
+
+    private LocalDateTime lastOrderTime;
 
     @Builder
     public Member(String name, String nickname, String password, String phoneNumber, String email, Gender gender) {
