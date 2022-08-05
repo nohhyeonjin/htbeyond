@@ -6,6 +6,8 @@ import com.noh.htbeyond.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -27,4 +29,12 @@ public class MemberService {
         return member;
     }
 
+    public Member findById(Long id) {
+        Optional<Member> oMember = memberRepository.findById(id);
+        if (oMember.isPresent()) {
+            return oMember.get();
+        } else {
+            return null;
+        }
+    }
 }
