@@ -14,6 +14,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        http.formLogin()
+                .loginProcessingUrl("/login")
+                .usernameParameter("email")
+                .passwordParameter("password");
         http.authorizeRequests()
                 .anyRequest().permitAll();
     }
