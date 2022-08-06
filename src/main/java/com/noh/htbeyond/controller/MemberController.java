@@ -5,6 +5,7 @@ import com.noh.htbeyond.controller.dto.MemberResDTO;
 import com.noh.htbeyond.controller.dto.MembersResDTO;
 import com.noh.htbeyond.model.Member;
 import com.noh.htbeyond.service.MemberService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +22,7 @@ public class MemberController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/member")
+    @ApiOperation(value = "회원가입", tags = "member")
     public Long Join(@RequestBody @Valid JoinDTO joinDTO) {
         String rawPassword = joinDTO.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
@@ -31,6 +33,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/{id}")
+    @ApiOperation(value = "단일 회원 상세 정보 조회", tags = "member")
     public MemberResDTO getMember(@PathVariable Long id) {
         Member member = memberService.findById(id);
 
@@ -38,6 +41,7 @@ public class MemberController {
     }
 
     @GetMapping("/members")
+    @ApiOperation(value = "여러 회원 목록 조회", tags = "member")
     public List<MembersResDTO> getMembers(Pageable pageable) {
         return memberService.findAll(pageable).getContent();
     }
